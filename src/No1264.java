@@ -3,9 +3,11 @@ import java.util.*;
 public class No1264 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        char [] vowel = {'a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U'};
-        List<Integer> list = new ArrayList<>();
         String msg;
+
+        List<Integer> list = new ArrayList<>();
+        char [] vowel = {'a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U'};
+
         while(!(msg=sc.nextLine()).equals("#")){
             int count=0;
             for(int i=0; i<msg.length(); i++){
