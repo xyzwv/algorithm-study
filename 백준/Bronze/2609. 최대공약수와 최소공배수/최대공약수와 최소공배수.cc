@@ -1,29 +1,19 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
+
+int getGcd(int a, int b) {
+    int r = a % b;
+    if(r == 0) return b;
+    return getGcd(b, r);
+}
 
 int main() {
     int a, b;
     cin >> a >> b;
-    if(a < b){
-        int temp = a;
-        a = b;
-        b = temp;
-    }
-    
-    int r = b;
-    int gcd;
-    int lcm = a*b;
-    
-    while(a % b != 0) {
-        r = a % b;
-        a = b;
-        b = r;
-    }
-    
-    gcd = r;
-    lcm /= r;
-    
-    cout << gcd << endl << lcm;
-    
-    return 0;
+    if(a < b) swap(a, b);
+
+    int gcd = getGcd(a, b);
+    int lcm = a*b/gcd;
+
+    cout << gcd << "\n" << lcm;
 }
