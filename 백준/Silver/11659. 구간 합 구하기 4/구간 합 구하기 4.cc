@@ -1,24 +1,26 @@
 #include <iostream>
+#include <vector>
 using namespace std;
+
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(0); cout.tie(0);
+    cin.tie(NULL);
+    cout.tie(NULL);
     
-    int n, m;
+    int n, m, x, i, j;
     cin >> n >> m;
-    int s[100005] = {0};
-    for(int i=1; i<=n; i++){
-        int x;
-        cin >> x;
-        s[i] += s[i-1] + x;
+    
+    vector<int> sum(n+1, 0);
+    for(int i=1; i<=n; i++) {
+        cin >> sum[i];
+        sum[i] += sum[i-1];
     }
     
-    int i, j;
-    while(m--){
+    while(m--) {
         cin >> i >> j;
-        cout << s[j] - s[i-1] << "\n";
+        cout << sum[j] - sum[i-1] << "\n";
     }
-
+    
     return 0;
 }
