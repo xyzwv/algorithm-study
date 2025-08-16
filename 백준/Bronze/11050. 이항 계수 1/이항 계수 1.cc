@@ -1,22 +1,21 @@
 #include <iostream>
-#include <vector>
 
 using namespace std;
+
+int factorial(int num) {
+    int mul = 1;
+    for(int i=1; i<=num; i++) mul *= i;
+    return mul;
+}
 
 int main()
 {
     int N, K;
 
     cin >> N >> K;
-    
-    vector<vector<int>> bc(N+1, vector<int>(N+1, 1));
-    for(int i=2; i<=N; i++) {
-        for(int j=1; j<i; j++) {
-            bc[i][j] = bc[i-1][j-1] + bc[i-1][j];
-        }
-    }
 
-    cout << bc[N][K];
+    if(K == 0 || N == K) cout << 1;
+    else cout << factorial(N) / (factorial(K) * factorial(N-K));
 
     return 0;
 }
