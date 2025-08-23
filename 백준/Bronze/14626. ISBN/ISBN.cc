@@ -8,7 +8,7 @@ int main()
     string s;
     cin >> s;
     
-    for(int i=0; i<s.size()-1; i++) {
+    for(int i=0; i<s.size(); i++) {
         if(s[i] == '*') {
             idx = i;
             continue;
@@ -16,7 +16,6 @@ int main()
         (i%2 == 0) ? mul = 1 : mul = 3;
         sum += (s[i] - '0') * mul;
     }
-    sum += s[s.size()-1] - '0';
 
     (idx%2 == 0) ? mul = 1 : mul = 3;
     
