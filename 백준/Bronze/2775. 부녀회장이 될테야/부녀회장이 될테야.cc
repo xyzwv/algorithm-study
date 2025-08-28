@@ -1,36 +1,27 @@
 #include <iostream>
-#include <vector>
 
 using namespace std;
 
-vector<vector<int>> apartment(15, vector<int>(15));
-
-int dp(int x, int y) {
-    if(x == 0) return apartment[x][y] = y;
-    
-    if(apartment[x][y] > 0) return apartment[x][y];
-    
-    for(int i=1; i<=y; i++) {
-        apartment[x][y] += dp(x-1, i);
-    }
-    return apartment[x][y];
-}
-
 int main()
 {
-    int T, cnt = 0;
-    cin >> T;
+    int dp[15][15] = {0};
     
-    while(cnt < T) {
-        cnt++;
-        
-        int k, n;
-        cin >> k >> n;
-        
-        apartment.assign(15, vector<int>(15, 0));
-        cout << dp(k, n) << "\n";
+    for(int j=1; j<15; j++) dp[0][j] = j;
+    for(int i=1; i<15; i++) {
+        dp[i][1] = 1;
+        for(int j=1; j<15; j++) {
+            dp[i][j] = dp[i][j-1] + dp[i-1][j];
+        }
     }
     
+    int T;
+    cin >> T;
+    
+    while(T--) {
+        int k, n;
+        cin >> k >> n;
+        cout << dp[k][n] << "\n";
+    }
     
     return 0;
 }
