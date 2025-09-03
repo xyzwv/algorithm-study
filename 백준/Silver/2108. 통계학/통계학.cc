@@ -16,39 +16,33 @@ int main()
 
     sort(v.begin(), v.end());
 
-    int average = 0, median = 0, mode = 0, range = 0;
-    int sum = 0, max = 0;
+    int sum = 0;
+    for(int x : v) sum += x;
+    int average = round(sum / (double)N);
 
-    vector<int> cnt(N);
-    for(int i=0; i<N; i++) {
-        sum += v[i];
+    int median = v[N/2];
+    int range = v.back() - v.front();
 
-        if(i == N/2) median = v[i];
+    int maxFreq = 0;
+    vector<int> f;
+    int i = 0;
+    while(i < N) {
+        int j = i + 1;
+        while(j < N && v[j] == v[i]) j++;
 
-        if(v[max] < v[i]) {
-            max = i;
-            cnt[max]++;
+        int freq = j - i;
+        if(freq > maxFreq) {
+            maxFreq = freq;
+            f.clear();
+            f.push_back(v[i]);
+        } else if(freq == maxFreq) {
+            f.push_back(v[i]);
         }
-        else if(v[max] == v[i]) {
-            cnt[max]++;
-        }
+
+        i = j;
     }
 
-    int m = N-1, p = 0;
-    for(int i=N-1; i>=0; i--) {
-        if(cnt[m] < cnt[i]) {
-            m = i;
-            p = 0;
-        }
-        else if(cnt[m] == cnt[i]) {
-            p = m;
-            m = i;
-        }
-    }
-
-    mode = (p == 0) ? v[m] : v[p];
-    range = v[N-1] - v[0];
-    average = round((double)sum / N);
+    int mode = (f.size() == 1) ? f[0] : f[1];
 
     cout << average << "\n" << median << "\n" << mode << "\n" << range;
     
