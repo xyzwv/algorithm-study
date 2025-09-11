@@ -18,29 +18,24 @@ int main()
         }
     }
 
-    vector<vector<int>> ans(N, vector<int>(N, 0));
     queue<int> q;
     for(int i=0; i<N; i++) {
-        vector<int> visited(N, false);
+        vector<bool> visited(N, false);
         q.push(i);
 
         while(!q.empty()) {
             int cur = q.front();
             q.pop();
-            visited[cur] = true;
-                
-            for(int j : graph[cur]) {
-                ans[i][j] = 1;
-                if(visited[j]) continue;
-                q.push(j);
-                visited[j] = true;
+            
+            for(int next : graph[cur]) {
+                if(visited[next]) continue;
+                q.push(next);
+                visited[next] = true;
             }
         }
-    }
 
-    for(int i=0; i<N; i++) {
         for(int j=0; j<N; j++) {
-            cout << ans[i][j] << " ";
+            cout << visited[j] << " ";
         }
         cout << "\n";
     }
