@@ -31,7 +31,9 @@ int main()
                 
             for(int j : graph[cur]) {
                 ans[i][j] = 1;
-                if(!visited[j]) q.push(j);
+                if(visited[j]) continue;
+                q.push(j);
+                visited[j] = true;
             }
         }
     }
