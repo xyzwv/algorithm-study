@@ -3,11 +3,14 @@
 using namespace std;
 
 bool solution(vector<string> phone_book) {
-    sort(phone_book.begin(), phone_book.end());
-    for(int i=0; i<phone_book.size()-1; i++) {
-        string cur = phone_book[i];
-        string next = phone_book[i+1];
-        if(cur.size() < next.size() && next.substr(0, cur.size()) == cur) return false;
+    set<string> s;
+    for(auto& phno : phone_book) s.insert(phno);
+    for(auto& phno : phone_book) {
+        string prefix;
+        for(int i=0; i<phno.size() - 1; i++) {
+            prefix.push_back(phno[i]);
+            if(s.count(prefix)) return false;
+        }
     }
     return true;
 }
