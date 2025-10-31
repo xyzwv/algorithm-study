@@ -1,11 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int getMax(int* priority) {
+bool isMax(int* cnt, int p) {
+    int max = 0;
     for(int i=9; i>0; i--) {
-        if(priority[i] > 0) return i;
+        if(cnt[i]) {
+            max = i;
+            break;
+        }
     }
-    return 0;
+    return max == p;
 }
 
 int main()
@@ -13,39 +17,34 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
 
-    int T;
+    int T, N, M;
     cin >> T;
-    
     while(T--) {
-        int N, M;
         cin >> N >> M;
-
-        int ans = 0;
-        int priority[10] = {0};
+        int order = 0;
+        int cnt[10] = {0};
         queue<pair<int, int>> q;
         for(int i=0; i<N; i++) {
-            int num;
-            cin >> num;
-            q.push({num, i});
-            priority[num]++;
+            int p;
+            cin >> p;
+            cnt[p]++;
+            q.push({p, i});
         }
 
         while(!q.empty()) {
-            auto [p, o] = q.front();
-            q.pop();  
-            
-            if(p == getMax(priority)) {
-                priority[p]--;
-                ans++;
-                if(o == M) {
-                    cout << ans << "\n";
+            auto [p, i] = q.front();
+            q.pop();
+            if(isMax(cnt, p)) {
+                cnt[p]--;
+                order++;
+                if(i == M) {
+                    cout << order << "\n";
+                    break;
                 }
-            } else {
-                q.push({p, o});
             }
-
+            q.push({p, i});
         }
     }
-    
+
     return 0;
 }
