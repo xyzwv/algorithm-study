@@ -1,45 +1,36 @@
-#include <iostream>
-#include <vector>
-#include <set>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
 
-bool comp(string a, string b){
-    if(a.size() < b.size()) {
-        return true;
-    }
-    else if(a.size() == b.size()) {
-        return a < b;
-    }
-    else return false;
+bool comp(string a, string b) {
+    if(a.size() == b.size()) return a < b;
+    return a.size() < b.size();
 }
 
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
-    
-    int n;
-    string input;
+
+    int N;
+    cin >> N;
+
     set<string> s;
+    string str;
+    for(int i=0; i<N; i++) {
+        cin >> str;
+        s.insert(str);
+    }
+
     vector<string> v;
-    
-    cin >> n;
-    
-    while(n--){
-        cin >> input;
-        s.insert(input);
+    for(auto word : s) {
+        v.push_back(word);
     }
-    
-    for(auto& e : s){
-        v.push_back(e);
-    }
-    
+
     sort(v.begin(), v.end(), comp);
     
-    for(auto& e : v) {
-        cout << e << "\n";
+    for(auto& word : v) {
+        cout << word << "\n";
     }
-    
+
     return 0;
 }
