@@ -7,14 +7,13 @@ bool comp(string a, string b) {
 }
 
 string solution(vector<int> numbers) {
+    string answer = "";
     vector<string> v;
-    for(int n : numbers) v.push_back(to_string(n));
+    for(int& num : numbers) v.push_back(to_string(num));
     
     sort(v.begin(), v.end(), comp);
-    
     if(v.front() == "0") return "0";
     
-    string answer = "";
-    for(string s : v) answer += s;
+    for(string& s : v) answer += s;
     return answer;
 }
