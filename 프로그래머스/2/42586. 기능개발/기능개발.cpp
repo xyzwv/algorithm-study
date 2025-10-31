@@ -6,24 +6,25 @@ vector<int> solution(vector<int> progresses, vector<int> speeds) {
     vector<int> answer;
     
     queue<int> q;
+    
     for(int i=0; i<progresses.size(); i++) {
-        int progress = progresses[i];
-        int day = 0;
-        while(progress < 100) {
-            progress += speeds[i];
+        int day = 1;
+        while(progresses[i] + day * speeds[i] < 100) {
             day++;
         }
         q.push(day);
     }
     
-    
     while(!q.empty()) {
-        int prior = q.front();
-        int cnt = 0;
-        while(!q.empty() && q.front() <= prior) {
-            cnt++;
+        int day = q.front();
+        q.pop();
+        int cnt = 1;
+        
+        while(!q.empty() && q.front() <= day) {
             q.pop();
+            cnt++;
         }
+        
         answer.push_back(cnt);
     }
     
