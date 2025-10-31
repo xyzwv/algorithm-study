@@ -1,37 +1,23 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-
-int ans;
-
-void backtracking(int x) {
-    if(x == 0) {
-        ans++;
-        return;
-    }
-    for(int i=1; i<4; i++) {
-        if(x < i) continue;
-        backtracking(x-i);
-    }
-    return;
-}
 
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    
-    int t, n;
-    cin >> t;
-    while(t--) {
+    cin.tie(NULL); cout.tie(NULL);
+
+    int T, n;
+    cin >> T;
+    int dp[11] = {0};
+    dp[1] = 1;
+    dp[2] = 2;
+    dp[3] = 4;
+    for(int i=4; i<11; i++) {
+        dp[i] = dp[i-1] + dp[i-2] + dp[i-3];
+    }
+    while(T--) {
         cin >> n;
-        
-        ans=0;
-        for(int i=1; i<4; i++) {
-            backtracking(n-i);
-        }
-        
-        cout << ans << "\n";
+        cout << dp[n] << '\n';
     }
 
     return 0;
